@@ -1,0 +1,37 @@
+* {
+    box-sizing: border-box;
+    margin: 0px;
+}
+
+body {
+    background-color: #E29578;
+}
+
+.master {
+    position: relative;
+    top:25px;
+    left:25px;
+    width: 800px;
+    height: auto;
+    min-height: 800px;
+    border:2px solid black;
+    border-radius: 10px;
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+    grid-gap:10px;
+    padding: 15px;
+    background-color: #006D77;
+
+}
+
+.left-container, .right-container {
+    border: 2px solid black;
+}
+
+.left-container {
+    background-color: #EDF6F9;
+}
+
+.right-container {
+    background-color: #83C5BE ;
+}
