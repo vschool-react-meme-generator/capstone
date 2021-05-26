@@ -116,8 +116,29 @@ h3 {
     padding: 15px;
 }
 
+.meme-widgets-editstate {
+    height: 250px;
+    width: 100%;
+    border: 2px solid black;
+    margin: 15px 0px;
+    background-color: #ffddd2 ;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 15px;
+}
+
+
+
 .saved-meme-widget {
     height:175px;
+}
+
+.saved-meme-widget-editstate {
+    height:175px;
+    position:relative;
+    left: 38px;
 }
 
 .widget-image {

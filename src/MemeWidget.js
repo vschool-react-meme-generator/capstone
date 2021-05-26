@@ -2,18 +2,20 @@ import React from "react"
 
 function MemeWidget(props) {
 
-    if(props.editMode === false) {
+    if(props.editMode === true ) {
+
+        /* we probably need to change this one to a form */
         return(
-            <div className="meme-widgets">
-                    <div className="saved-meme-widget">
+            <div className="meme-widgets-editstate">
+                    <div className="saved-meme-widget-editstate">
                         <img className="widget-image" src={props.image} />
                         <input className="saved-meme-toptext" placeholder={props.toptext} ></input>
-                        <input className="saved-meme-bottomtext" placeholder={props.toptext} ></input>
+                        <input className="saved-meme-bottomtext" placeholder={props.bottomtext} ></input>
                         
                     </div>
                     
                     <div className="widget-buttons">
-                        <button onClick={props.edit} id={props.id}>Save</button>
+                        <button onClick={props.save} id={props.id}>Save</button>
                     </div>
                 </div>
         )

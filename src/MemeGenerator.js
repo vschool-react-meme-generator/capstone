@@ -10,7 +10,6 @@ function MemeGenerator(props) {
                 <h2 className="bottom">{props.bottomText}</h2>
             </div>
             <form onSubmit={props.submitForm} className="meme-form">
-
                 <input
                     type="text"
                     name="topText"

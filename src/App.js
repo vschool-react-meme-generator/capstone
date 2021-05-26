@@ -19,6 +19,7 @@ class App extends Component {
         this.handleSubmit = this.handleSubmit.bind(this)
         this.deleteSavedMeme = this.deleteSavedMeme.bind(this)
         this.editSavedMeme = this.editSavedMeme.bind(this)
+        this.saveSavedMeme = this.saveSavedMeme.bind(this)
     }
 
     deleteSavedMeme(e) {
@@ -47,6 +48,11 @@ class App extends Component {
 
         //Then, in the MemeWidget component, we can use a conditional rendering to evaluate wheter the component is in edit mode or not
 
+    }
+
+    saveSavedMeme(e) {
+        const {id} = e.target
+        console.log(`we are saving ${id}`)
     }
 
     //initial ret request for meme
@@ -92,7 +98,7 @@ class App extends Component {
 
     render() {
 
-        const allSavedMemes = this.state.savedMemes.map((meme, i) => <MemeWidget key={i} id={i} toptext={meme.topText} bottomtext={meme.bottomText} image={meme.imgUrl} delete={this.deleteSavedMeme} edit={this.editSavedMeme} editMode={meme.editModeOn}/> )
+        const allSavedMemes = this.state.savedMemes.map((meme, i) => <MemeWidget key={i} id={i} toptext={meme.topText} bottomtext={meme.bottomText} image={meme.imgUrl} delete={this.deleteSavedMeme} edit={this.editSavedMeme} editMode={meme.editModeOn} save={this.saveSavedMeme}/> )
 
          //console.log("State Saved Meme" + this.state.savedMemes[0].name)
         /* console.log(this.state) */
