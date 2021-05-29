@@ -21,6 +21,7 @@ class App extends Component {
         this.editSavedMeme = this.editSavedMeme.bind(this)
         this.saveSavedMeme = this.saveSavedMeme.bind(this)
         this.saveEditMeme = this.saveEditMeme.bind(this)
+
     }
 
     deleteSavedMeme(e) {
@@ -48,6 +49,7 @@ class App extends Component {
         //this method of editSavedMeme() needs to flip that to true
 
         //Then, in the MemeWidget component, we can use a conditional rendering to evaluate wheter the component is in edit mode or not
+
         let newMemes = this.state.savedMemes.map(meme => {
             if(meme.id === id) {
                 meme.editModeOn = true
@@ -80,6 +82,7 @@ class App extends Component {
 
         
         this.setState({savedMemes: newMemes})
+
     }
 
     saveSavedMeme(e) {
@@ -118,8 +121,12 @@ class App extends Component {
                 savedMemes: [...prevState.savedMemes, {editModeOn: false,topText: prevState.topText, bottomText: prevState.bottomText, imgUrl: prevState.randomImage}],
                 randomImage: this.state.memes[Math.ceil(Math.random() * this.state.memes.length)].url,
                 topText: "",
+
                 bottomText: "",
                 editModeOn: false
+=======
+                bottomText: ""
+
             }
         })
 
@@ -139,7 +146,10 @@ class App extends Component {
         return(
             <div className="master">
                 <div className="left-container">
+
                     <MemeGenerator randomImage={this.state.randomImage} topText={this.state.topText} bottomText={this.state.bottomText} submitForm={this.handleSubmit} changeHandler={this.handleChange} saveEditMem={this.saveEditMeme} />
+=======
+
                         
                     
                     
