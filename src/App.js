@@ -20,6 +20,8 @@ class App extends Component {
         this.deleteSavedMeme = this.deleteSavedMeme.bind(this)
         this.editSavedMeme = this.editSavedMeme.bind(this)
         this.saveSavedMeme = this.saveSavedMeme.bind(this)
+        this.saveEditMeme = this.saveEditMeme.bind(this)
+
     }
 
     deleteSavedMeme(e) {
@@ -47,6 +49,39 @@ class App extends Component {
         //this method of editSavedMeme() needs to flip that to true
 
         //Then, in the MemeWidget component, we can use a conditional rendering to evaluate wheter the component is in edit mode or not
+
+        let newMemes = this.state.savedMemes.map(meme => {
+            if(meme.id === id) {
+                meme.editModeOn = true
+                return meme
+            } else {
+                return meme
+            }
+        })
+        console.log(newMemes)
+        this.setState({savedMemes: newMemes})
+        console.log("end of edit func")
+        
+
+
+    }
+
+    saveEditMeme(e) {
+        const {id} = e.target
+        let newMemes = this.state.savedMemes(meme => {
+
+            if(meme.id === id) { 
+            meme.topText = "we just edited this text"
+            meme.bottomText = "we just edited this text"
+            return meme
+            } else
+            
+            return meme
+        })
+        //let foundMeme = newMemes.find(meme => meme.id === id)
+
+        
+        this.setState({savedMemes: newMemes})
 
     }
 
@@ -86,7 +121,12 @@ class App extends Component {
                 savedMemes: [...prevState.savedMemes, {editModeOn: false,topText: prevState.topText, bottomText: prevState.bottomText, imgUrl: prevState.randomImage}],
                 randomImage: this.state.memes[Math.ceil(Math.random() * this.state.memes.length)].url,
                 topText: "",
+
+                bottomText: "",
+                editModeOn: false
+=======
                 bottomText: ""
+
             }
         })
 
@@ -106,7 +146,10 @@ class App extends Component {
         return(
             <div className="master">
                 <div className="left-container">
-                    <MemeGenerator randomImage={this.state.randomImage} topText={this.state.topText} bottomText={this.state.bottomText} submitForm={this.handleSubmit} changeHandler={this.handleChange} />
+
+                    <MemeGenerator randomImage={this.state.randomImage} topText={this.state.topText} bottomText={this.state.bottomText} submitForm={this.handleSubmit} changeHandler={this.handleChange} saveEditMem={this.saveEditMeme} />
+=======
+
                         
                     
                     

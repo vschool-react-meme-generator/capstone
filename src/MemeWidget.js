@@ -15,7 +15,8 @@ function MemeWidget(props) {
                     </div>
                     
                     <div className="widget-buttons">
-                        <button onClick={props.save} id={props.id}>Save</button>
+                       {/*changed your code here!!!!!!!*/} <button onClick={() => props.saveEditMeme} id={props.id}>Save</button>
+
                     </div>
                 </div>
         )
