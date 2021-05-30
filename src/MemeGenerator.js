@@ -5,7 +5,7 @@ function MemeGenerator(props) {
     return (
         <div className="meme-generator">
             <div className="meme">
-                <img src={props.randomImage ? props.randomImage : null} />
+                <img src={props.randomImage ? props.randomImage : null} alt="" />
                 <h2 className="top">{props.topText}</h2>
                 <h2 className="bottom">{props.bottomText}</h2>
             </div>
