@@ -17,9 +17,9 @@ class App extends Component {
         this.deleteSavedMeme = this.deleteSavedMeme.bind(this)
         this.editSavedMeme = this.editSavedMeme.bind(this)
         this.saveEditMeme = this.saveEditMeme.bind(this)
-        this.saveSavedMeme = this.saveSavedMeme.bind(this)
         this.handleChange = this.handleChange.bind(this)
         this.handleSubmit = this.handleSubmit.bind(this)
+        this.handleEditChange = this.handleEditChange.bind(this)
     }
     deleteSavedMeme(e) {
         let { id } = e.target
@@ -54,25 +54,29 @@ class App extends Component {
         this.setState({ savedMemes: newSavedMemes })
         console.log("end of edit func")
     }
+
     saveEditMeme(e) {
-        let { id } = e.target
+        e.preventDefault()
+
+        let {id} = e.target
         id = Number(id)
-        let newSavedMemes = this.state.savedMemes.map(meme => {
+
+        console.log("clicked save", id )
+
+        let saveEditedMemes = this.state.savedMemes.map(meme => {
             if (meme.id === id) {
-                meme.topText = "we just edited this text"
-                meme.bottomText = "we just edited this text"
-                meme.editModeOn = false
+                meme.topText = "we saved it" // will eventually grab from prevstate
+                meme.bottomText = "we saved it" //will eventually grab from prevstate
                 return meme
-            } else
+            } else {
                 return meme
+            }
         })
-        //let foundMeme = newSavedMemes.find(meme => meme.id === id)
-        this.setState({ savedMemes: newSavedMemes })
+
+        this.setState({ savedMemes: saveEditedMemes })
     }
-    saveSavedMeme(e) {
-        const { id } = e.target
-        console.log(`we are saving ${id}`)
-    }
+
+
     //initial ret request for meme
     componentDidMount() {
         axios.get("https://api.imgflip.com/get_memes")
@@ -87,6 +91,17 @@ class App extends Component {
         const { name, value } = event.target
         this.setState({ [name]: value })
     }
+
+    handleEditChange (e) {
+        let {name, value, id } = e.target
+        id = Number(id)
+        console.log(name, id, value)
+
+       //I have no idea how to access the correct meme in the savedMemes state array to update the topText and bottomText within the state. This is what I'm trying below:
+
+    }
+    
+
     handleSubmit(e) {
         e.preventDefault()
         //const randomNumber = Math.random() * this.state.memes.length
@@ -112,6 +127,7 @@ class App extends Component {
         })
         console.log(this.state.savedMemes)
     }
+
     render() {
         
         const allSavedMemes = this.state.savedMemes.map((meme, i) => <MemeWidget 
@@ -119,18 +135,24 @@ class App extends Component {
             id={meme.id} 
             toptext={meme.topText} 
             bottomtext={meme.bottomText} 
-            image={meme.imgUrl} 
+            image={meme.imgUrl}
+            editMode={meme.editModeOn}  
             delete={this.deleteSavedMeme} 
             edit={this.editSavedMeme} 
-            editMode={meme.editModeOn} 
-            save={this.saveEditMeme} />)
+            saveMeme={this.saveEditMeme}
+            editChangeHandler={this.handleEditChange} />)
 
-        //console.log("State Saved Meme" + this.state.savedMemes[0].name)
-        /* console.log(this.state) */
+       
         return (
             <div className="master">
                 <div className="left-container">
-                    <MemeGenerator randomImage={this.state.randomImage} topText={this.state.topText} bottomText={this.state.bottomText} submitForm={this.handleSubmit} changeHandler={this.handleChange} />
+                    <MemeGenerator 
+                        randomImage={this.state.randomImage} 
+                        topText={this.state.topText} 
+                        bottomText={this.state.bottomText} 
+                        submitForm={this.handleSubmit} 
+                        changeHandler={this.handleChange} 
+                    />
                 </div>
                 <div className="right-container">
                     {allSavedMemes}
