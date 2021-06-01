@@ -97,7 +97,7 @@ class App extends Component {
         id = Number(id)
         console.log(name, id, value)
 
-       //I have no idea how to access the correct meme in the savedMemes state array to update the topText and bottomText within the state. This is what I'm trying below:
+       //I have no idea how to access the correct meme in the savedMemes state array to update the topText and bottomText within the state. 
 
     }
     
