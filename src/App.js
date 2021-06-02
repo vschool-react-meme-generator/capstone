@@ -46,17 +46,6 @@ class App extends Component {
 
         console.log("clicked save", id )
 
-        let saveEditedMemes = this.state.savedMemes.map(meme => {
-            if (meme.id === id) {
-                meme.topText = "we saved it" // will eventually grab from prevstate
-                meme.bottomText = "we saved it" //will eventually grab from prevstate
-                return meme
-            } else {
-                return meme
-            }
-        })
-
-        this.setState({ savedMemes: saveEditedMemes })
     }
 
 

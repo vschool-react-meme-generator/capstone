@@ -1,13 +1,13 @@
 import React, {Component} from "react"
 
 class MemeWidget extends Component {
-    constructor() {
-        super()
+    constructor(props) {
+        super(props)
         this.state= {
-            id: "",
+            id: this.props.id,
             editMode:false,
-            bottomText:"",
-            topText:"",
+            bottomText:this.props.bottomtext,
+            topText:this.props.toptext,
         }
 
         this.editToggle = this.editToggle.bind(this)
@@ -57,7 +57,7 @@ class MemeWidget extends Component {
                             />
                             
                             <div className="widget-buttons">
-                                <button className="save-button" onClick={this.editToggle} id={this.props.id}>Save Meme</button>
+                                <button className="save-button"  id={this.props.id}>Save Meme</button>
                                 
                             </div>                               
                         </form> 
