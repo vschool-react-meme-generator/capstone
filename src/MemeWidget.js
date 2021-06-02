@@ -12,6 +12,7 @@ class MemeWidget extends Component {
 
         this.editToggle = this.editToggle.bind(this)
         this.handleChangeEdit = this.handleChangeEdit.bind(this)
+        this.saveEditedMeme = this.saveEditedMeme.bind(this)
     }
 
     editToggle(e) {
@@ -28,6 +29,12 @@ class MemeWidget extends Component {
             this.setState({ [name]: value })
     }
 
+    saveEditedMeme(e) {
+        e.preventDefault()
+
+        console.log("saved: ", e.target.id)
+    }
+
     render() {
         //console.log(props)
         if(this.state.editMode === true ) {
@@ -40,7 +47,7 @@ class MemeWidget extends Component {
                         
                         <img className="widget-image" src={this.props.image} alt="" />
                         
-                        <form onSubmit={this.props.saveMeme}>
+                        <form onSubmit={this.saveEditedMeme} id={this.props.id}>
                             <input 
                                 id={this.props.id}
                                 name="topText"
