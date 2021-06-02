@@ -36,7 +36,7 @@ body {
     display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: center;
+    justify-content: space-evenly;
     padding: 0px 15px;
 }
 
@@ -62,6 +62,13 @@ body {
     border:2px solid black;
     border-radius: 5px;
     background-color: black;
+}
+
+h1 {
+    font-family: 'Montserrat', sans-serif;
+    font-size:55px;
+    text-align: center;
+    color: #E29578;
 }
 
 h2 {
@@ -139,6 +146,7 @@ h3 {
     height:175px;
     position:relative;
     left: 38px;
+    top: -15px;
 }
 
 .widget-image {

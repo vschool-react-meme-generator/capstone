@@ -6,17 +6,17 @@ class MemeWidget extends Component {
         this.state= {
             id: this.props.id,
             editMode:false,
-            bottomText:this.props.bottomtext,
-            topText:this.props.toptext,
+            bottomText: this.props.bottomtext,
+            topText: this.props.toptext,
         }
 
         this.editToggle = this.editToggle.bind(this)
         this.handleChangeEdit = this.handleChangeEdit.bind(this)
-        this.saveEditedMeme = this.saveEditedMeme.bind(this)
+        this.saveMeme = this.saveMeme.bind(this)
     }
 
     editToggle(e) {
-        console.log ("editing", e.target.id)
+
         this.setState(prevState => {
             return {
                 editMode: !prevState.editMode
@@ -29,10 +29,21 @@ class MemeWidget extends Component {
             this.setState({ [name]: value })
     }
 
-    saveEditedMeme(e) {
+    saveMeme(e) {
         e.preventDefault()
+        let {id} = e.target
+        id = Number(id)
 
-        console.log("saved: ", e.target.id)
+        console.log(`FROM MEMEWIDGET'S saveMeme:\n\nid: ${id}\ntoptext: ${this.state.topText}\nbottomtext: ${this.state.bottomText}`)
+
+        this.props.saveEditMeme(id, this.state.topText, this.state.bottomText, this.state.editMode)
+
+        this.setState(prevState => {
+            return {
+                editMode: !prevState.editMode
+            }
+        })
+        
     }
 
     render() {
@@ -47,7 +58,7 @@ class MemeWidget extends Component {
                         
                         <img className="widget-image" src={this.props.image} alt="" />
                         
-                        <form onSubmit={this.saveEditedMeme} id={this.props.id}>
+                        <form onSubmit={this.saveMeme} id={this.props.id}>
                             <input 
                                 id={this.props.id}
                                 name="topText"
@@ -64,7 +75,7 @@ class MemeWidget extends Component {
                             />
                             
                             <div className="widget-buttons">
-                                <button className="save-button"  id={this.props.id}>Save Meme</button>
+                                <button className="save-button" id={this.props.id}>Save Meme</button>
                                 
                             </div>                               
                         </form> 

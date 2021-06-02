@@ -39,15 +39,26 @@ class App extends Component {
     
     
 
-    saveEditMeme(e) {
-        e.preventDefault()
+    saveEditMeme(id,top,bottom,editmode) {
 
-        let {id} = e.target
+        console.log(`FROM APP'S saveEditMeme\n\nid: ${id}\ntoptext: ${top}\nbottomtext: ${bottom}\neditMode: ${editmode}`)
 
-        console.log("clicked save", id )
+        let savedEditedMemes = this.state.savedMemes.map(meme => {
+            if(meme.id === id) {
+                meme.bottomText = bottom
+                meme.topText = top
+                return meme
+            } else {
+                return meme
+            }
+        })
 
+        console.log(savedEditedMemes)
+
+        this.setState({
+            savedMemes: savedEditedMemes
+        })
     }
-
 
     //initial ret request for meme
     componentDidMount() {
@@ -101,13 +112,16 @@ class App extends Component {
             image={meme.imgUrl}
             editMode={meme.editModeOn}  
             delete={this.deleteSavedMeme} 
-            saveMeme={this.saveEditMeme}
+            saveEditMeme={this.saveEditMeme}
             changeHandler={this.handleChange} />)
 
        
         return (
             <div className="master">
                 <div className="left-container">
+            
+                    <h1>React Meme Generator</h1>
+                    
                     <MemeGenerator 
                         randomImage={this.state.randomImage} 
                         topText={this.state.topText} 
