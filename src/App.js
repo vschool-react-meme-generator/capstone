@@ -15,15 +15,14 @@ class App extends Component {
             savedMemes: []
         }
         this.deleteSavedMeme = this.deleteSavedMeme.bind(this)
-        this.editSavedMeme = this.editSavedMeme.bind(this)
         this.saveEditMeme = this.saveEditMeme.bind(this)
         this.handleChange = this.handleChange.bind(this)
         this.handleSubmit = this.handleSubmit.bind(this)
-        this.handleEditChange = this.handleEditChange.bind(this)
+        
     }
+   
     deleteSavedMeme(e) {
         let { id } = e.target
-        id = Number(id)
         console.log(`Removing ${id}`)
 
         let deleteMemeIndex = this.state.savedMemes.findIndex(function(meme) {
@@ -37,29 +36,13 @@ class App extends Component {
             savedMemes: savedMemesAfterDelete
         })
     }
-    editSavedMeme(e) {
-        let { id } = e.target
-        id = Number(id)
-        console.log("we are editing", id)
-        
-        let newSavedMemes = this.state.savedMemes.map(meme => {
-            if (meme.id === id) {
-                meme.editModeOn = true
-                console.log("Within State, we tuurned on edit mode of meme id " + meme.id)
-                return meme
-            } else {
-                return meme
-            }
-        })
-        this.setState({ savedMemes: newSavedMemes })
-        console.log("end of edit func")
-    }
+    
+    
 
     saveEditMeme(e) {
         e.preventDefault()
 
         let {id} = e.target
-        id = Number(id)
 
         console.log("clicked save", id )
 
@@ -87,20 +70,12 @@ class App extends Component {
             //.then(res => console.log(res.data.data.memes))
             .catch(err => console.log(err))
     }
+    
     handleChange(event) {
         const { name, value } = event.target
+        console.log (name, value)
         this.setState({ [name]: value })
-    }
-
-    handleEditChange (e) {
-        let {name, value, id } = e.target
-        id = Number(id)
-        console.log(name, id, value)
-
-       //I have no idea how to access the correct meme in the savedMemes state array to update the topText and bottomText within the state. 
-
-    }
-    
+    }    
 
     handleSubmit(e) {
         e.preventDefault()
@@ -110,12 +85,11 @@ class App extends Component {
             // console.log(prevState)
             return {
                 savedMemes: [...prevState.savedMemes, 
-                    { 
-                    editModeOn: false, 
+                    {  
                     topText: prevState.topText, 
                     bottomText: prevState.bottomText, 
                     imgUrl: prevState.randomImage, 
-                    id: Math.floor(Math.random() * 1000000) 
+                    id: Number(Math.floor(Math.random() * 1000000)) 
                     }
                 ],
 
@@ -138,9 +112,8 @@ class App extends Component {
             image={meme.imgUrl}
             editMode={meme.editModeOn}  
             delete={this.deleteSavedMeme} 
-            edit={this.editSavedMeme} 
             saveMeme={this.saveEditMeme}
-            editChangeHandler={this.handleEditChange} />)
+            changeHandler={this.handleChange} />)
 
        
         return (
