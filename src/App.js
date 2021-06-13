@@ -23,6 +23,7 @@ class App extends Component {
    
     deleteSavedMeme(e) {
         let { id } = e.target
+        id = Number(id)
         console.log(`Removing ${id}`)
 
         let deleteMemeIndex = this.state.savedMemes.findIndex(function(meme) {
@@ -95,8 +96,8 @@ class App extends Component {
 
                 randomImage: this.state.memes[Math.ceil(Math.random() * this.state.memes.length)].url,
                 topText: "",
-                bottomText: "",
-                editModeOn: false
+                bottomText: ""
+                
             }
         })
         console.log(this.state.savedMemes)
@@ -110,7 +111,6 @@ class App extends Component {
             toptext={meme.topText} 
             bottomtext={meme.bottomText} 
             image={meme.imgUrl}
-            editMode={meme.editModeOn}  
             delete={this.deleteSavedMeme} 
             saveEditMeme={this.saveEditMeme}
             changeHandler={this.handleChange} />)
